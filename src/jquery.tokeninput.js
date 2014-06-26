@@ -13,6 +13,7 @@
   var DEFAULT_SETTINGS = {
     // Search settings
     method: "GET",
+    caching: true,
     queryParam: "q",
     searchDelay: 300,
     minChars: 1,
@@ -973,7 +974,7 @@
       function run_search(query) {
           var cache_key = query + computeURL();
           var cached_results = cache.get(cache_key);
-          if (cached_results) {
+          if (settings.caching && cached_results) {
               if ($.isFunction($(input).data("settings").onCachedResult)) {
                 cached_results = $(input).data("settings").onCachedResult.call(hidden_input, cached_results);
               }
