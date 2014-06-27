@@ -22,6 +22,7 @@
     contentType: "json",
     excludeCurrent: false,
     excludeCurrentParameter: "x",
+    tokensIds: "tokens",
 
     // Prepopulation settings
     prePopulate: null,
@@ -1002,6 +1003,7 @@
                   // Prepare the request
                   ajax_params.data[$(input).data("settings").queryParam] = query;
                   ajax_params.type = $(input).data("settings").method;
+                  ajax_params.data[$(input).data("settings").tokensIds] = getSavedTokensIds();
                   ajax_params.dataType = $(input).data("settings").contentType;
                   if ($(input).data("settings").crossDomain) {
                       ajax_params.dataType = "jsonp";
@@ -1054,6 +1056,15 @@
                   populate_dropdown(query, results);
               }
           }
+      }
+
+      // return saved token ids
+      function getSavedTokensIds() {
+          var tokens_ids = new Array();
+          for (var i = 0; i < saved_tokens.length; i++) {
+              tokens_ids.push(saved_tokens[i].id);
+          }
+          return tokens_ids;
       }
 
       // compute the dynamic URL
